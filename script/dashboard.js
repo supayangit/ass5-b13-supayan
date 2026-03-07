@@ -88,7 +88,7 @@ const displayIssues = (issues) => {
 
         <div class="flex justify-between items-center">
 
-          <div class="w-6 h-6 flex items-center rounded-full bg-green-500">
+          <div class="w-6 h-6 flex items-center rounded-full">
             <img src="${issue.status === 'open' ? 'assets/Open-Status.png' : 'assets/Closed-Status.png'}" alt="">
           </div>
 
