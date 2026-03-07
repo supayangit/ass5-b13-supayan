@@ -39,14 +39,13 @@
             box-shadow: none;
         }
 
-        .card.open{
+        .card.open {
             border-top: 4px solid #16A34A;
         }
 
-        .card.close{
+        .card.close {
             border-top: 4px solid #9333EA;
         }
-
     </style>
 
     <title>Dashboard | GitHub Issues Tracker</title>
@@ -100,58 +99,7 @@
                 </div>
             </div>
 
-            <div id="card-container">
-
-                <div class="card open w-[256px] h-auto shadow-md rounded-box space-y-4">
-
-                    <div class="space-y-3 p-4 border-b border-gray-300">
-
-                        <div class="flex justify-between items-center">
-
-                            <div id="status-img" class="w-6 h-6 flex items-center rounded-full bg-green-500">
-                                <img src="assets/Open-Status.png" alt="">
-                            </div>
-                            <button
-                                class="btn btn-outline border-none bg-red-100 btn-error rounded-full p-2 w-20 h-7 text-red-600 font-medium text-[12px]">HIGH
-                            </button>
-
-                        </div>
-
-                        <div>
-                            <h1 class="font-semibold text-[#1F2937] text-[14px]">Fix Navigation Menu On Mobile Devices
-                            </h1>
-                            <p class="text-[12px] text-[#64748B]">The navigation menu doesn't collapse properly on
-                                mobile devices...
-                            </p>
-                        </div>
-
-
-                        <div id="labels" class="flex items-center gap-2">
-                            <button
-                                class="btn btn-outline bg-red-100 border-2 border-red-200 btn-error rounded-full p-2 w-19 h-8 text-red-600 font-medium text-[12px]"><i
-                                    class="fa-solid fa-bug"></i> BUG
-                            </button>
-                            <button
-                                class="btn btn-outline bg-orange-100 border-2 border-orange-200 btn-error rounded-full p-2 w-fit h-8 text-orange-600 font-medium text-[12px]"><i
-                                    class="fa-brands fa-chrome"></i> HELP WANTED
-                            </button>
-
-                        </div>
-                    </div>
-
-                    <div class="text-[12px] text-[#64748B] items-center px-4 pb-4">
-                        <div>
-                            #<span id="no-by-author">1</span>
-                            by <span id="author">john_doe</span>
-                        </div>
-                        <div id="date">
-                            01/15/2024
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
+            <div id="card-container" class="grid grid-cols-4"> </div>
         </div>
     </section>
 
