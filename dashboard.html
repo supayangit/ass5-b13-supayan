@@ -71,15 +71,16 @@
 
     <section class="board-section py-15 px-[245px] bg-[#F8FAFC] space-y-6">
 
+
         <nav class="w-100% bg-white shadow-sm rounded-box">
             <ul class="menu menu-vertical lg:menu-horizontal rounded-box p-6 flex gap-2">
-                <li class=""><a
-                        class="active w-[120px] py-[8px] px-[12px] block border border-gray-300/50 text-center">All</a>
+                <li><a data-type="all" onclick="fetchIssues('all')"
+                        class="filter w-[120px] py-[8px] px-[12px] block border border-gray-300/50 text-center">All</a>
                 </li>
-                <li class=""><a
-                        class="w-[120px] py-[8px] px-[12px] block border border-gray-300/50 text-center">Open</a></li>
-                <li class=""><a
-                        class="w-[120px] py-[8px] px-[12px] block border border-gray-300/50 text-center">Closed</a></li>
+                <li><a data-type="open" onclick="fetchIssues('open')"
+                        class="filter w-[120px] py-[8px] px-[12px] block border border-gray-300/50 text-center">Open</a></li>
+                <li><a data-type="closed" onclick="fetchIssues('closed')"
+                        class="filter w-[120px] py-[8px] px-[12px] block border border-gray-300/50 text-center">Closed</a></li>
             </ul>
         </nav>
 

@@ -1,19 +1,34 @@
-const fetchAll = async () => {
+const fetchIssues = async (type="all") => {
     try {
         const url = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
         const res = await fetch(url);
         const details = await res.json();
+        const obj = details.data;
+        console.log(obj);
 
-        displayIssues(details.data);
-        console.log(details.data);
-    } catch (error) {
+        setActiveFilter(type);
+        displayIssues(obj, type);
+
+      } catch (error) {
         console.error("Error fetching issues:", error);
     }
 };
 
+const setActiveFilter = (type) => {
+  const filters = document.querySelectorAll(".filter");
+
+  filters.forEach(filter => {
+    if(filter.classList.contains("active")){
+      filter.classList.remove("active");
+    };
+    if(filter.dataset.type === type){
+      filter.classList.add("active");
+    };
+  });
+};
 
 document.addEventListener("DOMContentLoaded", () => {
-    fetchAll();
+    fetchIssues();
 });
 
 /**
@@ -75,11 +90,16 @@ const loadLabels = (labels, container) => {
 };
 
 // Function to display issues
-const displayIssues = (issues) => {
+const displayIssues = (issues, type) => {
   const container = document.getElementById("card-container");
   container.innerHTML = ""; // Clear previous cards
 
   issues.forEach(issue => {
+
+    if((type == "open" || type == "closed") && type!==issue.status) {
+    return;
+    };
+
     const card = document.createElement("div");
     card.className = `card ${issue.status} w-[256px] h-auto shadow-md rounded-box space-y-4`;
 
@@ -119,6 +139,7 @@ const displayIssues = (issues) => {
 
       <div class="text-[12px] text-[#64748B] items-center px-4 pb-4">
         <div>
+          # <span>${issue.id}</span>
           by <span class="author">${issue.author}</span>
         </div>
         <div class="date">
