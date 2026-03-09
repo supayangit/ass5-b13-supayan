@@ -1,5 +1,7 @@
 const issuesNo = document.getElementById("issues-no");
+
 const fetchIssues = async (type = "all") => {
+  manageSpinner(true);
   try {
     const url = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
     const res = await fetch(url);
@@ -45,7 +47,7 @@ const capitalize = (text) => {
 const displayIssue = (issue) => {
 
   const modal = document.createElement("dialog");
-  modal.className = "w-[700px] max-h-[440px] shadow-md rounded-box space-y-1 p-4 m-auto";
+  modal.className = "w-full md:w-[700px] h-fit md:max-h-[440px] shadow-md rounded-box space-y-1 p-4 m-auto";
   modal.id = "issue_modal";
 
   const statusColor =
@@ -59,7 +61,7 @@ const displayIssue = (issue) => {
 
   modal.innerHTML = `
         <div class="flex flex-col gap-1 px-4">
-            <h1 class="font-bold text-[#1F2937] text-[24px]">
+            <h1 class="font-bold text-[#1F2937] text-[18px] md:text-[24px]">
                 ${issue.title}
             </h1>
 
@@ -69,16 +71,16 @@ const displayIssue = (issue) => {
                     ${capitalize(issue.status)}
                 </button>
                 •
-                <div class="text-[14px]">
+                <div class="text-[12px] md:text-[14px]">
                     Opened by <span class="assignee">${issue.assignee ? issue.assignee : "Not mentioned"}</span>
                 </div>
                 •
-                <div class="date text-[14px]">
+                <div class="date text-[12px] md:text-[14px]">
                      ${new Date(issue.updatedAt).toLocaleDateString('en-US', {
-                        month: 'short',
-                        day: 'numeric',
-                        year: 'numeric'
-                     })}
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric'
+  })}
                 </div>
             </div>
         </div>
@@ -127,11 +129,11 @@ const displayIssue = (issue) => {
 
 // Function to render labels into a given container
 const loadLabels = (labels, container) => {
-  container.innerHTML = ""; 
+  container.innerHTML = "";
 
   labels.forEach(label => {
     const config = labelStyles[label];
-    if (!config) return; 
+    if (!config) return;
 
     const btn = document.createElement("button");
     btn.className = config.classes;
@@ -178,7 +180,7 @@ const displayIssues = (issues, type) => {
     };
 
     const card = document.createElement("div");
-    card.className = `card ${issue.status} w-[256px] h-auto shadow-md rounded-box space-y-4`;
+    card.className = `card ${issue.status} mx-auto w-full md:w-[256px] h-auto shadow-md rounded-box space-y-4`;
     card.setAttribute("onclick", `openIssue(${issue.id})`);
 
     card.innerHTML = `
@@ -236,37 +238,47 @@ const displayIssues = (issues, type) => {
     container.appendChild(card);
     issuesCount++;
   });
+  manageSpinner(false);
   issuesNo.innerText = `${issuesCount}`;
 };
 
-
-// // search
-// document.getElementById("btn-search").addEventListener("click", ()=>{
-//     const input = document.getElementById("input-search");
-//     const searchValue = input.value.trim().toLowerCase();
-
-//     fetch("https://openapi.programming-hero.com/api/words/all")
-//     .then((res) => res.json())
-//     .then((data) => {
-//         const allWords = data.data;
-//         const filterWords = allWords.filter(word =>
-//             word.word.toLowerCase().includes(searchValue));
-
-//         displayLevelWords(filterWords);
-//     });
-//     removeActive();
-// });
-
 // search
 document.getElementById("search-btn").addEventListener("click", () => {
+  manageSpinner(true);
   const searchText = document.getElementById("search-input").value.trim().toLowerCase();
   const url = `https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchText}`;
 
   fetch(url)
-  .then((res) => res.json())
-  .then((data) => {
-    const obj = data.data;
-    displayIssues(obj);
-    setActiveFilter();
-  })
-})
+    .then((res) => res.json())
+    .then((data) => {
+      const obj = data.data;
+      displayIssues(obj);
+      setActiveFilter();
+    })
+});
+
+// nav on small devices
+const navBtn = document.getElementById("nav-toggle-btn");
+const nav = document.getElementById("nav");
+const overlay = document.getElementById("nav-overlay");
+
+navBtn.addEventListener("click", () => {
+  nav.classList.toggle("translate-x-full");
+  overlay.classList.remove("hidden");
+});
+
+overlay.addEventListener("click", () => {
+  nav.classList.add("translate-x-full");   // slide nav out
+  overlay.classList.add("hidden");
+});
+
+// spinner
+const manageSpinner = (status) =>{
+    if(status==true){
+        document.getElementById("spinner").classList.remove("hidden");
+        document.getElementById("card-container").classList.add("hidden");
+    } else {
+        document.getElementById("spinner").classList.add("hidden");
+        document.getElementById("card-container").classList.remove("hidden");
+    }
+}

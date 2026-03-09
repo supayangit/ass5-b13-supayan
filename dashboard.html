@@ -50,7 +50,8 @@
         .card.closed {
             border-top: 4px solid #9333EA;
         }
-        .modal button{
+
+        .modal button {
             cursor: none;
         }
     </style>
@@ -58,59 +59,128 @@
     <title>Dashboard | GitHub Issues Tracker</title>
 </head>
 
-<body class="w-[1600px] mx-auto">
+<body class="max-w-[1600px] mx-auto">
 
-    <header class="flex justify-between py-4 px-20 border-  bg-white border-gray-300 sticky top-0 z-20">
-        <div class="flex items-start gap-3">
-            <img class="w-[36px] h-[37px]" src="assets/github-logo.png" alt="">
-            <h1 class="font-semibold text-[37px]">GitHub Issues Tracker</h1>
-        </div>
-        <div class="join flex gap-4">
-            <div>
-                <label class="input validator join-item">
-                    <i class="text-[#64748B] fa-solid fa-magnifying-glass"></i>
-                    <input id="search-input" type="text" placeholder="Search issues..." required />
-                </label>
+    <!-- HEADER -->
+    <header
+        class="w-full flex flex-col md:flex-row gap-4 md:gap-16 md:justify-between py-4 px-4 md:px-20 border-b bg-white border-gray-300 sticky top-0 z-10">
+
+        <div class="flex justify-between">
+            <div class="flex items-center gap-3">
+                <img class="w-[36px] h-[37px]" src="assets/github-logo.png" alt="">
+                <h1 class="font-semibold text-[18px] md:text-[37px] whitespace-nowrap">
+                    GitHub Issues Tracker
+                </h1>
             </div>
-            <button id="search-btn" class="btn btn-primary join-item">+ New Issue</button>
+
+            <div id="nav-toggle-btn" class="flex-none md:hidden">
+                <button class="btn btn-square btn-ghost">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        class="inline-block h-5 w-5 stroke-current">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Overlay -->
+            <div id="nav-overlay" class="fixed inset-0 bg-black/50 z-40 hidden"></div>
+
         </div>
+
+        <div class="join flex gap-4 w-full md:w-auto">
+            <label class="input validator join-item flex w-full md:w-auto">
+                <i class="text-[#64748B] fa-solid fa-magnifying-glass"></i>
+                <input class="flex-1 text-[12px] md:text-[14px]" id="search-input" type="text"
+                    placeholder="Search issues..." required />
+            </label>
+
+            <button id="search-btn" class="btn btn-primary join-item whitespace-nowrap text-[12px] md:text-[14px]">
+                + New Issue
+            </button>
+        </div>
+
     </header>
 
-    <section class="board-section py-15 px-[245px] bg-[#F8FAFC] space-y-6">
 
-        <nav class="w-100% bg-white shadow-sm rounded-box">
-            <ul class="menu menu-vertical lg:menu-horizontal rounded-box p-6 flex gap-2">
-                <li><a data-type="all" onclick="fetchIssues('all')"
-                        class="filter w-[120px] py-[8px] px-[12px] block border border-gray-300/50 text-center">All</a>
+    <section class="w-full board-section py-4 md:py-6 px-4 md:px-20 bg-[#F8FAFC] space-y-2 md:space-y-6">
+
+        <!-- FILTER NAV -->
+        <nav id="nav" class="fixed top-12 right-0 w-[200px] md:w-full h-full md:h-auto bg-white shadow-sm rounded-box z-50
+            transform translate-x-full transition-transform
+            md:static md:top-auto md:right-auto md:translate-x-0 md:block">
+            <ul class="menu md:menu-horizontal md:flex-nowrap rounded-box p-4 md:p-6 gap-2 overflow-x-auto">
+
+                <li>
+                    <a data-type="all" onclick="fetchIssues('all')"
+                        class="filter w-[100px] md:w-[120px] py-[8px] md:px-[12px] border border-gray-300/50 flex items-center justify-center">
+                        All
+                    </a>
                 </li>
-                <li><a data-type="open" onclick="fetchIssues('open')"
-                        class="filter w-[120px] py-[8px] px-[12px] block border border-gray-300/50 text-center">Open</a>
+
+                <li>
+                    <a data-type="open" onclick="fetchIssues('open')"
+                        class="filter w-[100px] md:w-[120px] py-[8px] md:px-[12px] border border-gray-300/50 flex items-center justify-center">
+                        Open
+                    </a>
                 </li>
-                <li><a data-type="closed" onclick="fetchIssues('closed')"
-                        class="filter w-[120px] py-[8px] px-[12px] block border border-gray-300/50 text-center">Closed</a>
+
+                <li>
+                    <a data-type="closed" onclick="fetchIssues('closed')"
+                        class="filter w-[100px] md:w-[120px] py-[8px] md:px-[12px] border border-gray-300/50 flex items-center justify-center">
+                        Closed
+                    </a>
                 </li>
+
             </ul>
         </nav>
 
-        <div class="w-100% bg-white shadow-sm rounded-box space-y-6">
-            <div id="info-container" class="flex justify-between p-6 border-b border-gray-300">
-                <div class="flex gap-1">
-                    <img class="" src="assets/Aperture.png" alt="">
+
+        <!-- INFO SECTION -->
+        <div class="w-full bg-white shadow-sm rounded-box md:space-y-6">
+
+            <div id="info-container"
+                class="flex flex-col md:flex-row gap-3 md:gap-0 md:justify-between p-4 md:p-6 border-b border-gray-300">
+
+                <div class="flex gap-2 items-start">
+                    <img src="assets/Aperture.png" alt="">
 
                     <div>
-                        <h1 class="font-semibold text-[#1F2937] text-[20px]"><span id="issues-no"></span> Issues
+                        <h1 class="font-semibold text-[#1F2937] text-[16px] md:text-[20px]">
+                            <span id="issues-no"></span> Issues
                         </h1>
-                        <p class="font-[16px] text-[#64748B] text-nowrap">Track and manage your project issues</p>
+
+                        <p class="text-[12px] md:text-[16px] text-[#64748B]">
+                            Track and manage your project issues
+                        </p>
                     </div>
                 </div>
-                <div class="flex gap-3 items-center">
-                    <span class="text-[16px]"><i class="fa-solid fa-circle text-green-500 mr-1"></i>Open</span>
-                    <span class="text-[16px]"><i class="fa-solid fa-circle text-purple-500 mr-1"></i>Closed</span>
+
+                <div class="flex gap-4 items-center">
+                    <span class="text-[12px] md:text-[16px]">
+                        <i class="fa-solid fa-circle text-green-500 mr-1"></i>Open
+                    </span>
+
+                    <span class="text-[12px] md:text-[16px]">
+                        <i class="fa-solid fa-circle text-purple-500 mr-1"></i>Closed
+                    </span>
                 </div>
+
             </div>
 
-            <div id="card-container" class="grid grid-cols-4 gap-y-4"> </div>
+            <!-- spinner -->
+            <div id="spinner" class="flex justify-center items-center py-10 hidden">
+                <span class="loading loading-bars loading-xl"></span>
+            </div>
+
+            <!-- CARDS -->
+            <div id="card-container"
+                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 py-4 md:p-6 mx-auto">
+            </div>
+
         </div>
+
     </section>
 
     <script src="script/dashboard.js"></script>
