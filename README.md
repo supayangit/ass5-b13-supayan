@@ -1,35 +1,99 @@
-### Questions
-- 1️⃣ What is the difference between var, let, and const?
-- 2️⃣ What is the spread operator (...)?
-- 3️⃣ What is the difference between map(), filter(), and forEach()?
-- 4️⃣ What is an arrow function?
-- 5️⃣ What are template literals?
+# 🐙 GitHub Issues Tracker
 
-### Answers
-Here’s a simple and short explanation for each:
+A modern and responsive issue tracking web application that replicates a GitHub-style issue management system. The platform allows users to securely log in, browse issues, search specific entries, and filter them based on status while viewing detailed information in an interactive and user-friendly dashboard.
 
-1️⃣ Difference between var, let, and const:
+The application is designed with a focus on real-world workflow simulation, providing a structured interface for managing and analyzing issue data efficiently.
 
-var → function-scoped, can be redeclared and updated.
-let → block-scoped, can be updated but not redeclared in same scope.
-const → block-scoped, cannot be updated or redeclared. Must be initialized.
+---
 
-2️⃣ Spread operator (`...`)
-Expands an array or object into individual elements.
-Ex:
-let arr = [1,2]; let newArr = [...arr,3];
+## 🚀 Live Demo
 
-3️⃣ Difference between map(),filter(), and forEach()
-map() → returns a new array after transforming items.
-filter() → returns a new array with items that pass a condition.
-forEach() → just loops over items, doesn’t return anything.
+🔗 Live Site: https://supayangit.github.io/GitHub-Issues-Tracker  
+💻 GitHub Repository: https://github.com/supayangit/GitHub-Issues-Tracker
 
-4️⃣ Arrow function
-Shorter function syntax using `=>`.
-Ex:
-const add = (a,b) => a+b;
+## 📸 Screenshot
+<img width="1920" height="1080" alt="Screenshot (273)" src="https://github.com/user-attachments/assets/e947e5e7-2aaf-4009-8a88-e244645ebd4c" />
 
-5️⃣ Template literals
-Strings using backticks ` ` that allow variables and multi-line text.
-Ex:
-let name = "Supayan"; console.log(`Hello ${name}`);
+## 🔑 Demo Credentials
+
+- Username: admin  
+- Password: admin123  
+
+---
+
+## 🎯 Project Overview
+
+GitHub Issues Tracker is a frontend-focused web application that simulates an issue management system similar to GitHub. After authentication, users can explore a list of issues, filter them by status, and perform keyword-based searches. Each issue is presented in a structured card format, and detailed information can be viewed through an interactive modal.
+
+The system emphasizes clean UI design, fast data interaction, and smooth user experience.
+
+---
+
+## ✨ Key Features
+
+- Secure login system with demo credentials
+- Dynamic issue fetching and rendering
+- Advanced filtering by issue status (All, Open, Closed)
+- Real-time search functionality
+- Interactive issue cards with detailed modal view
+- Visual status indicators with color-coded borders
+- Responsive grid layout optimized for all devices
+- Loading states for better user experience
+- Active tab highlighting for better navigation feedback
+
+---
+
+## 🧠 Technical Highlights
+
+- API-driven data handling and rendering
+- State-based UI management using vanilla JavaScript
+- Efficient DOM manipulation for dynamic updates
+- Modular structure for maintainability
+- Responsive design for mobile, tablet, and desktop
+- Clean separation of UI and logic layers
+
+---
+
+## 🛠️ Tech Stack
+
+- HTML5  
+- CSS3 (Tailwind / DaisyUI / Vanilla CSS)  
+- JavaScript (ES6+)  
+
+---
+
+## ⚙️ Project Setup Guide (Run Locally)
+
+Follow these steps to run the project on your local machine:
+
+---
+
+### 1. Clone the repository
+git clone https://github.com/supayangit/GitHub-Issues-Tracker.git
+
+### 2. Navigate into the project directory
+cd GitHub-Issues-Tracker
+
+### 3. Open the project
+Since this is a vanilla JavaScript project, you can directly open it:
+
+Option 1 (Simple)
+Open index.html in your browser
+Option 2 (Recommended)
+
+#### Use Live Server (VS Code extension):
+
+#### Install Live Server
+Right click index.html
+Click "Open with Live Server"
+
+### 4. Login Credentials
+
+Use the default admin credentials:
+Username: admin
+Password: admin123
+
+### 🚀 Deployment
+Hosted on GitHub Pages
+Fully static frontend project
+No backend setup required
